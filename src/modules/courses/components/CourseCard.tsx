@@ -10,7 +10,7 @@ export default function CourseCard({ course }: { course: Course }) {
       <div className="p-4 space-y-3">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-semibold leading-tight">{course.title}</h3>
-          <span className="text-[10px] px-2 py-1 rounded-full bg-accent text-neutral">
+          <span className="text-[10px] px-2 py-1 bg-primary rounded-full text-neutral">
             {course.category}
           </span>
         </div>

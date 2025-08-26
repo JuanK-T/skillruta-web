@@ -76,7 +76,7 @@ export default function CoursePublicPage() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
-                  {formatDuration(course.totalDurationSec)}
+                  {formatDuration(course.totalDurationSec || 0)}
                 </div>
               </div>
             </div>

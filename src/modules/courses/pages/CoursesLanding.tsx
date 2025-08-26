@@ -1,15 +1,16 @@
-import { useMemo } from 'react';
-import { mockCourses } from '@/modules/courses/data/mockCourses';
-import { HeroSection, FeaturesSection, CoursesGridSection } from '@/modules/courses/pages/sections';
+import { HeroSection, FeaturesSection } from './sections';
+import CoursesGridSection from './sections/CoursesGridSection';
+import { mockCourses } from '../data/mockCourses';
 
 export default function CoursesLanding() {
-  const published = useMemo(() => mockCourses.filter((c) => c.isPublished), []);
+  // Filtrar solo los cursos publicados para el diseño
+  const publishedCourses = mockCourses.filter(course => course.isPublished);
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection publishedCount={published.length} />
+      <HeroSection publishedCount={publishedCourses.length} />
       <FeaturesSection />
-      <CoursesGridSection courses={published} />
+      <CoursesGridSection courses={publishedCourses} />
     </div>
   );
 }
