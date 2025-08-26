@@ -1,16 +1,15 @@
 import { HeroSection, FeaturesSection } from './sections';
 import CoursesGridSection from './sections/CoursesGridSection';
-import { mockCourses } from '../data/mockCourses';
+import { useState } from 'react';
 
 export default function CoursesLanding() {
-  // Filtrar solo los cursos publicados para el diseño
-  const publishedCourses = mockCourses.filter(course => course.isPublished);
+  const [publishedCount, setPublishedCount] = useState(0);
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection publishedCount={publishedCourses.length} />
+      <HeroSection publishedCount={publishedCount} />
       <FeaturesSection />
-      <CoursesGridSection courses={publishedCourses} />
+      <CoursesGridSection onTotalChange={setPublishedCount} />
     </div>
   );
 }
