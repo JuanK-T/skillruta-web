@@ -13,3 +13,10 @@ export interface AuthContextValue {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
+
+export interface AuthError {
+  message?: string;
+  error?: string;
+  status?: number;
+  [key: string]: unknown;
+}

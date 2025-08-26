@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-
-// Interface para el error esperado
-interface AuthError {
-  message?: string;
-  [key: string]: unknown; // Para otras propiedades que pueda tener el error
-}
+import { AuthError } from '@/types/auth';
+import { toastCongrats } from '@/lib/ui/specialToasts';
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -29,6 +25,7 @@ export default function RegisterPage() {
             setLoading(true);
             try {
               await register(name, email, pwd);
+              toastCongrats(name);
               nav('/');
             } catch (error) {
               // Type-safe error handling

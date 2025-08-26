@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { BookOpen } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -47,8 +48,20 @@ export default function Navbar() {
               <span className="text-sm text-muted-foreground">
                 Hola, <b className="text-foreground">{user.name ?? user.email}</b>
               </span>
-              <Button variant="outline" size="sm" onClick={logout}>
-                Salir
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={async () => {
+                  try {
+                    await logout();
+                    toast.success('Sesión cerrada');
+                  } catch (e) {
+                    console.error(e);
+                    toast.error('No se pudo cerrar sesión');
+                  }
+                }}
+              >
+                Cerrar Sesion
               </Button>
             </div>
           )}
