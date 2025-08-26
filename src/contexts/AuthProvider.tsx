@@ -8,6 +8,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [bootstrapped, setBootstrapped] = useState(false);
 
+  // Calcula isAuthenticated basado en la existencia del usuario
+  const isAuthenticated = !!user;
+
   // Bootstrap: intenta /auth/me; si 401 → /auth/refresh → /auth/me
   useEffect(() => {
     (async () => {
@@ -49,7 +52,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const value = useMemo(() => ({ user, login, register, logout }), [user, login, register, logout]);
+  const value = useMemo(
+    () => ({
+      user,
+      isAuthenticated, // ← AÑADE ESTA PROPIEDAD
+      login,
+      register,
+      logout,
+    }),
+    [user, isAuthenticated, login, register, logout]
+  );
 
   // Opcional: puedes mostrar un loader global hasta que sepamos si hay sesión o no
   if (!bootstrapped) return null;

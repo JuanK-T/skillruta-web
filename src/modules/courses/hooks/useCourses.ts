@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Course, CoursesResponse } from '../types/types';
+import { Course, CoursesResponse } from '../types';
 import { coursesApi } from '../api/coursesApi';
 
 interface UseCoursesResult {

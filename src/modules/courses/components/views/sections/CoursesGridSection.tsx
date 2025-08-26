@@ -1,5 +1,5 @@
-import CourseCard from '../../components/CourseCard';
-import { useCourses } from '../../hooks/useCourses';
+import CourseCard from '../CourseCard';
+import { useCourses } from '../../../hooks/useCourses';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useEffect } from 'react';
 
@@ -17,7 +17,6 @@ export default function CoursesGridSection({ onTotalChange }: CoursesGridSection
     }
   }, [total, loading, onTotalChange]);
 
-  // ... el resto del código permanece igual
   if (loading) {
     return (
       <section id="cursos" className="py-20">
@@ -30,7 +29,10 @@ export default function CoursesGridSection({ onTotalChange }: CoursesGridSection
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, index) => (
-              <div key={index} className="rounded-2xl bg-white shadow ring-1 ring-black/5 overflow-hidden">
+              <div
+                key={index}
+                className="rounded-2xl bg-white shadow ring-1 ring-black/5 overflow-hidden"
+              >
                 <Skeleton className="aspect-video w-full" />
                 <div className="p-4 space-y-3">
                   <Skeleton className="h-6 w-3/4" />

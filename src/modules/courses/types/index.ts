@@ -22,3 +22,5 @@ export interface CoursesResponse {
   hasNext: boolean;
   hasPrev: boolean;
 }
+
+export type CourseCategory = 'MARKETING' | 'DESIGN' | 'PROGRAMMING' | 'BUSINESS' | 'OTHER' | string;
