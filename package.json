@@ -1,7 +1,7 @@
 {
   "name": "skillruta-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "config": {
     "commitizen": {
@@ -17,9 +17,9 @@
     ]
   },
   "scripts": {
-    "dev": "vite",
+    "start:dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview",
+    "start": "vite preview",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write .",
