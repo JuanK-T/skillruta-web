@@ -43,7 +43,10 @@ export default function LoginPage() {
               className="w-full rounded-xl border px-3 py-2 outline-none focus:ring-2"
             />
           </div>
-          <button type="submit" className="w-full rounded-xl bg-primary px-3 py-2 text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary/40 disabled:opacity-60">
+          <button
+            type="submit"
+            className="w-full rounded-xl bg-primary px-3 py-2 text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
+          >
             {loading ? 'Ingresando…' : 'Entrar'}
           </button>
           <p className="text-sm text-center opacity-70">

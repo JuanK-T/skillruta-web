@@ -1,36 +1,44 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import type { User } from '@/types/auth';
+import { apiLogin, apiLogout, apiMe, apiRegister } from '@/modules/auth/api/authApi';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  // Cargar de localStorage (demo). En producción, usa cookies httpOnly + refresh token.
+  // Intentar levantar sesión si ya hay cookies (sr_at) válidas
   useEffect(() => {
-    const raw = localStorage.getItem('sr:user');
-    if (raw) setUser(JSON.parse(raw));
+    (async () => {
+      try {
+        const me = await apiMe();
+        setUser({ id: me.id, email: me.email, role: me.role, name: me.email.split('@')[0] });
+      } catch {
+        setUser(null);
+      }
+    })();
   }, []);
 
-  useEffect(() => {
-    if (!user) localStorage.removeItem('sr:user');
-    else localStorage.setItem('sr:user', JSON.stringify(user));
-  }, [user]);
-
   const login = useCallback(async (email: string, password: string) => {
-    // TODO: integrar API real (POST /auth/login)
-    console.log('Password:', password);
-    setUser({ id: crypto.randomUUID(), email, role: 'USER', name: email.split('@')[0] });
+    await apiLogin(email, password); // setea cookies
+    const me = await apiMe(); // trae perfil
+    setUser({ id: me.id, email: me.email, role: me.role, name: me.email.split('@')[0] });
   }, []);
 
   const register = useCallback(async (name: string, email: string, password: string) => {
-    // TODO: integrar API real (POST /auth/register)
-    console.log('Password:', password);
-    setUser({ id: crypto.randomUUID(), email, role: 'USER', name });
+    await apiRegister(email, password); // crea usuario
+    await apiLogin(email, password); // genera cookies
+    const me = await apiMe(); // trae perfil
+    setUser({ id: me.id, email: me.email, role: me.role, name });
   }, []);
 
-  const logout = useCallback(() => setUser(null), []);
+  const logout = useCallback(async () => {
+    try {
+      await apiLogout();
+    } finally {
+      setUser(null);
+    }
+  }, []);
 
   const value = useMemo(() => ({ user, login, register, logout }), [user, login, register, logout]);
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

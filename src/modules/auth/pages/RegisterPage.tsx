@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 
+// Interface para el error esperado
+interface AuthError {
+  message?: string;
+  [key: string]: unknown; // Para otras propiedades que pueda tener el error
+}
+
 export default function RegisterPage() {
   const { register } = useAuth();
   const nav = useNavigate();
@@ -9,6 +15,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
 
   return (
     <main className="mx-auto max-w-md px-4 py-10">
@@ -18,10 +25,18 @@ export default function RegisterPage() {
           className="mt-4 space-y-4"
           onSubmit={async (e) => {
             e.preventDefault();
+            setErr(null);
             setLoading(true);
-            await register(name, email, pwd);
-            setLoading(false);
-            nav('/');
+            try {
+              await register(name, email, pwd);
+              nav('/');
+            } catch (error) {
+              // Type-safe error handling
+              const authError = error as AuthError;
+              setErr(authError?.message ?? 'No se pudo registrar');
+            } finally {
+              setLoading(false);
+            }
           }}
         >
           <div className="space-y-1">
@@ -53,7 +68,18 @@ export default function RegisterPage() {
               className="w-full rounded-xl border px-3 py-2 outline-none focus:ring-2"
             />
           </div>
-          <button type="submit" className="w-full rounded-xl bg-primary px-3 py-2 text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary/40 disabled:opacity-60">
+
+          {err && (
+            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+              {err}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-xl bg-primary px-3 py-2 text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
+          >
             {loading ? 'Creando…' : 'Registrarme'}
           </button>
           <p className="text-sm text-center opacity-70">
