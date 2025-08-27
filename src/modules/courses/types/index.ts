@@ -1,3 +1,5 @@
+import { Chapter } from './chapter';
+
 export interface Course {
   id: string;
   title: string;
@@ -24,3 +26,18 @@ export interface CoursesResponse {
 }
 
 export type CourseCategory = 'MARKETING' | 'DESIGN' | 'PROGRAMMING' | 'BUSINESS' | 'OTHER' | string;
+
+export interface CourseDetail extends Course {
+  chapters: Chapter[];
+  objectives?: string[];
+  requirements?: string[];
+  isOwner?: boolean; // ← Añade esta propiedad
+  isEnrolled?: boolean; // ← Y esta
+}
+
+export interface CreateCourse {
+  title: string;
+  slug: string;
+  description?: string;
+  category: 'PROGRAMMING' | 'DESIGN' | 'BUSINESS' | 'MARKETING' | 'LIFESTYLE' | 'OTHER';
+}
