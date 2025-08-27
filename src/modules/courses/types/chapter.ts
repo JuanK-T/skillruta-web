@@ -1,5 +1,3 @@
-import { Course } from '.';
-
 export interface Chapter {
   id: string;
   title: string;
@@ -18,9 +16,19 @@ export interface CourseResource {
   url: string;
 }
 
-export interface CourseDetail extends Course {
-  chapters: Chapter[];
-  description: string;
-  objectives?: string[];
-  requirements?: string[];
+export interface CreateChapterData {
+  title: string;
+  description?: string;
+  videoUrl?: string;
+}
+
+export interface UpdateChapterData {
+  title?: string;
+  description?: string;
+  videoUrl?: string;
+  isPublished?: boolean;
+}
+
+export interface ReorderChaptersData {
+  chapterIds: string[];
 }

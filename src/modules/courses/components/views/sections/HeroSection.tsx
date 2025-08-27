@@ -67,7 +67,7 @@ export default function HeroSection({ publishedCount }: Props) {
             {isAuthenticated
               ? user?.role === 'ADMIN'
                 ? 'Gestiona la plataforma y supervisa el rendimiento general.'
-                : 'Monitorea el progreso de tus cursos y conecta con tus estudiantes.'
+                : 'Crea y comparte tu conocimiento con estudiantes de todo el mundo. Inspira y educa con SkillRuta.'
               : 'Aprende las habilidades más demandadas del mercado con cursos diseñados por expertos del Centro de Excelencia'}
           </p>
 
@@ -79,7 +79,7 @@ export default function HeroSection({ publishedCount }: Props) {
                 </Button>
               ) : (
                 <Button size="lg" className="text-lg px-8" asChild>
-                  <Link to="/instructor/dashboard">Mi Dashboard</Link>
+                  <Link to="/courses/new">Crear Contenido</Link>
                 </Button>
               )
             ) : (

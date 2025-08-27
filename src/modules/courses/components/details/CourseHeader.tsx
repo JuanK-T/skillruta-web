@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { Clock, User } from 'lucide-react';
-import { CourseDetail } from '@/modules/courses/types/chapter'; // Cambia a CourseDetail
+import { CourseDetail } from '../../types';
 import { getCategoryStyle, formatCategoryText } from '@/modules/courses/utils/categoryColors';
 
 interface CourseHeaderProps {

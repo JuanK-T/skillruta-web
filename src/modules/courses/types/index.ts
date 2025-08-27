@@ -5,7 +5,7 @@ export interface Course {
   title: string;
   slug: string;
   description: string;
-  category: string;
+  category: CourseCategory;
   isPublished: boolean;
   authorId: string;
   authorName: string;
@@ -25,7 +25,13 @@ export interface CoursesResponse {
   hasPrev: boolean;
 }
 
-export type CourseCategory = 'MARKETING' | 'DESIGN' | 'PROGRAMMING' | 'BUSINESS' | 'OTHER' | string;
+export enum CourseCategory {
+  MARKETING = 'MARKETING',
+  DESIGN = 'DESIGN',
+  PROGRAMMING = 'PROGRAMMING',
+  BUSINESS = 'BUSINESS',
+  OTHER = 'OTHER',
+}
 
 export interface CourseDetail extends Course {
   chapters: Chapter[];
@@ -35,9 +41,33 @@ export interface CourseDetail extends Course {
   isEnrolled?: boolean; // ← Y esta
 }
 
-export interface CreateCourse {
+export interface CreateCourseData {
   title: string;
-  slug: string;
   description?: string;
-  category: 'PROGRAMMING' | 'DESIGN' | 'BUSINESS' | 'MARKETING' | 'LIFESTYLE' | 'OTHER';
+  category: CourseCategory;
+  thumbnailUrl?: string;
+}
+
+export interface CourseFormData {
+  title: string;
+  description: string;
+  category: CourseCategory;
+  thumbnailUrl: string;
+}
+
+export interface UpdateCourseData {
+  title?: string;
+  description?: string;
+  category?: CourseCategory;
+  thumbnailUrl?: string;
+  isPublished?: boolean;
+  objectives?: string[];
+  requirements?: string[];
+}
+
+export interface CourseDetail extends Course {
+  chapters: Chapter[];
+  description: string;
+  objectives?: string[];
+  requirements?: string[];
 }

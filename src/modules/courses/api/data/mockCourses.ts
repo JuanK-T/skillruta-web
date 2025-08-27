@@ -1,4 +1,4 @@
-import type { Course } from '@/modules/courses/types';
+import { CourseCategory, type Course } from '@/modules/courses/types';
 
 export const mockCourses: Course[] = [
   {
@@ -6,7 +6,7 @@ export const mockCourses: Course[] = [
     title: 'React + TypeScript desde Cero',
     slug: 'react-typescript',
     description: 'Aprende a crear aplicaciones modernas con React y TypeScript desde cero.',
-    category: 'PROGRAMMING',
+    category: CourseCategory.MARKETING,
     isPublished: true,
     authorId: 'author-1',
     authorName: 'CoE Desarrollo',
@@ -21,7 +21,7 @@ export const mockCourses: Course[] = [
     title: 'Diseño UI: Sistemas de Diseño con Tailwind',
     slug: 'ui-design-tailwind',
     description: 'Crea y aplica sistemas de diseño consistentes con TailwindCSS.',
-    category: 'DESIGN',
+    category: CourseCategory.DESIGN,
     isPublished: true,
     authorId: 'author-2',
     authorName: 'CoE Diseño',
@@ -36,7 +36,7 @@ export const mockCourses: Course[] = [
     title: 'APIs & Microservicios: buenas prácticas',
     slug: 'apis-microservicios',
     description: 'Arquitectura y patrones para construir APIs y microservicios robustos.',
-    category: 'BUSINESS',
+    category: CourseCategory.BUSINESS,
     isPublished: false,
     authorId: 'author-3',
     authorName: 'CoE Backend',

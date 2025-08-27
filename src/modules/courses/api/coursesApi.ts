@@ -1,6 +1,11 @@
 import { http } from '@/lib/api/client';
-import { CoursesResponse } from '../types';
-import { CourseDetail } from '../types/chapter';
+import {
+  Course,
+  CoursesResponse,
+  CreateCourseData,
+  CourseDetail,
+  UpdateCourseData,
+} from '../types';
 
 export const coursesApi = {
   getCourses: async (params?: {
@@ -29,5 +34,35 @@ export const coursesApi = {
   },
   getCourseBySlug: async (slug: string): Promise<CourseDetail> => {
     return http<CourseDetail>(`/courses/${slug}`);
+  },
+  createCourse: async (courseData: CreateCourseData): Promise<Course> => {
+    return http<Course>('/courses', {
+      method: 'POST',
+      body: courseData,
+    });
+  },
+  getCourseById: async (id: string): Promise<CourseDetail> => {
+    return http<CourseDetail>(`/courses/${id}`);
+  },
+  updateCourse: async (id: string, courseData: UpdateCourseData): Promise<Course> => {
+    return http<Course>(`/courses/${id}`, {
+      method: 'PATCH',
+      body: courseData,
+    });
+  },
+  deleteCourse: async (id: string): Promise<void> => {
+    return http<void>(`/courses/${id}`, {
+      method: 'DELETE',
+    });
+  },
+  publishCourse: async (id: string): Promise<Course> => {
+    return http<Course>(`/courses/${id}/publish`, {
+      method: 'POST',
+    });
+  },
+  unpublishCourse: async (id: string): Promise<Course> => {
+    return http<Course>(`/courses/${id}/unpublish`, {
+      method: 'POST',
+    });
   },
 };

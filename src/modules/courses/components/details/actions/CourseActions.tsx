@@ -13,11 +13,11 @@ interface CourseActionsProps {
   onDelete?: () => void;
 }
 
-export function CourseActions({ 
-  course, 
-  onEnroll = () => {}, 
-  onPublishToggle = () => {}, 
-  onDelete = () => {} 
+export function CourseActions({
+  course,
+  onEnroll = () => {},
+  onPublishToggle = () => {},
+  onDelete = () => {},
 }: CourseActionsProps) {
   const { user } = useAuth();
   const isAuthenticated = !!user;
@@ -33,14 +33,15 @@ export function CourseActions({
           onPublishToggle={onPublishToggle}
           onDelete={onDelete}
         />
-        
+
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
           <div className="flex items-start">
             <div className="text-blue-600 mr-3 text-lg">👑</div>
             <div>
               <h4 className="font-semibold text-blue-800 mb-1">Modo instructor</h4>
               <p className="text-blue-700 text-sm">
-                Eres el creador de este curso. Puedes editarlo, ver estadísticas y gestionar su publicación.
+                Eres el creador de este curso. Puedes editarlo, ver estadísticas y gestionar su
+                publicación.
               </p>
             </div>
           </div>
@@ -59,7 +60,7 @@ export function CourseActions({
           courseSlug={course.slug}
           onEnroll={onEnroll}
         />
-        
+
         {!course.isEnrolled && (
           <div className="bg-green-50 border border-green-200 rounded-xl p-4">
             <div className="flex items-start">
@@ -67,7 +68,8 @@ export function CourseActions({
               <div>
                 <h4 className="font-semibold text-green-800 mb-1">¡Comienza tu aprendizaje!</h4>
                 <p className="text-green-700 text-sm">
-                  Inscríbete en este curso para acceder a todos los capítulos, materiales y certificado.
+                  Inscríbete en este curso para acceder a todos los capítulos, materiales y
+                  certificado.
                 </p>
               </div>
             </div>
